@@ -1,0 +1,30 @@
+# Base image with CUDA & PyTorch (GPU version). Use CPU version if no GPU needed.
+FROM pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime
+
+# Set working directory
+WORKDIR /app
+
+# Copy project files to the container
+COPY . /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    curl \
+    python3-opencv \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# [OPTIONAL] Install LLM dependencies
+# Uncomment if you’re using LLM integration
+# RUN pip install openai google-generativeai openrouter
+
+# Set environment variable for OpenRouter (optional)
+# ENV OPENROUTER_API_KEY=your_openrouter_api_key
+
+# Default command to run training (you can override in docker-compose or CLI)
+CMD ["python", "train_swin.py", "--train_dir", "./seai_images/training", "--val_dir", "./seai_images/validation", "--epochs", "10"]
