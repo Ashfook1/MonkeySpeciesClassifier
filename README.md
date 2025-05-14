@@ -1,4 +1,4 @@
-# 🐒 Monkey Species Classifier & Detection Simulator
+# 🐒 Monkey Species Classifier & Detection using Swin Transformers
 
 This repository contains a complete pipeline for classifying monkey species using Swin Transformers and visualizing simulated bounding box detections with confidence thresholds. The project includes training scripts, visualization plots, and simulated object detection with explanation support using LLMs (Large Language Models).
 
